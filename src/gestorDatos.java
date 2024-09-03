@@ -6,20 +6,20 @@ public class gestorDatos {
 	
 	/**El metodo buscarCuit se encarga de buscar el cuit dentro del listado ("Matriz" de forma secuencial).
 	 * 
-	 * @param String cuitABuscar
-	 * @return texto con la descripcion si encontro el cuit o no en el listado.
+	 * Cambia los estados del objeto CUIT. Si es exento o si esta en el listado.
+	 *
 	 */
-	public static String BuscarCuit(String cuitABuscar)
+	public static void BuscarCuit(CUIT objCUIT)
 	{
 		for (int i = 0; i < lista.length; i++) {
-			if (lista[i][0].equals(cuitABuscar)) {
+			if (lista[i][0].equals(objCUIT.getCuitFormatoBuscar())) {
 				if(lista[i][1].equals("E"))
-					return "El CUIT:"+cuitABuscar + " Esta Exento del impuesto";
+					objCUIT.setExento(true);
 				else
-					return "El CUIT:"+cuitABuscar + " NO esta Exento del impuesto";
+					objCUIT.setExento(false);
 			}
 		}
-		return "CUIT Inexistente en el listado.";
+		objCUIT.setInexistente(true);
 	}
 	
 }

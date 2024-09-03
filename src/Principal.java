@@ -6,18 +6,32 @@ public class Principal {
 		// TODO Auto-generated method stub
 
 		ControlCUIT cCuit = new ControlCUIT();
-		String retornarResultado = "";
 		Scanner teclado = new Scanner(System.in);
+		CUIT objCuit;
 
 		do {
 
 			System.out.println("Increse el Cuit");
 
-			String CUIT = teclado.nextLine();
+			objCuit = new CUIT(teclado.nextLine());
 
-			retornarResultado = cCuit.GestionarCUIT(CUIT);
-			System.out.println(retornarResultado);
-		} while (cCuit.isErrorFormato()); // Mientras el estado este en true= Hay ERROR pide otro cuit.
+			if (objCuit.isErrorFormato())
+				System.out.println("CUIT Invalido:" + objCuit.getCUIT());
+			else {
+				cCuit.GestionarCUIT(objCuit);
+
+				if (objCuit.isInexistente())
+					System.out.println("CUIT Inexistente en el listado." + objCuit.getCUIT());
+				else {
+					if (objCuit.isExento())
+						System.out.println("El CUIT:" + objCuit.getCUIT() + " Esta Exento del impuesto");
+					// return "El CUIT:"+cuitABuscar + " Esta Exento del impuesto";
+					else
+						System.out.println("El CUIT:" + objCuit.getCUIT() + " NO ESTA Exento del impuesto");
+					// return "El CUIT:"+cuitABuscar + " NO esta Exento del impuesto";
+				}
+			}
+		} while (objCuit.isErrorFormato()); // Mientras el estado este en true= Hay ERROR pide otro cuit.
 
 		teclado.close();
 
