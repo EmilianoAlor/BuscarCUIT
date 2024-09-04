@@ -1,3 +1,4 @@
+package main;
 import java.util.Objects;
 
 /**
@@ -5,7 +6,7 @@ import java.util.Objects;
  * 20123456789 o 20-12345678-9
  */
 public class CUIT {
-	private String CUIT;
+	private String cuitOriginal;
 	private long longCUIT = 0;
 	private String cuitFormatoBuscar;
 	private boolean errorFormato = true;
@@ -18,15 +19,15 @@ public class CUIT {
 	 * @param cuitIngresado
 	 */
 	public CUIT(String cuitIngresado) {
-		CUIT = cuitIngresado;
+		cuitOriginal = cuitIngresado;
 
-		if (CUIT.length() == 11 || CUIT.length() == 13) {
+		if (cuitOriginal.length() == 11 || cuitOriginal.length() == 13) {
 			// cuit valido. si tiene una longitud de 11 o 13.
 			try {
-				longCUIT = Long.parseLong(CUIT.replace("-", ""));
+				longCUIT = Long.parseLong(cuitOriginal.replace("-", ""));
 
 				if (this.longCUIT > 20000000000L && (longCUIT < 34999999999L)) {
-					this.cuitFormatoBuscar = CUIT.replace("-", "");
+					this.cuitFormatoBuscar = cuitOriginal.replace("-", "");
 					this.errorFormato = false;
 				} else
 					this.errorFormato = true;
@@ -46,7 +47,7 @@ public class CUIT {
 
 	@Override
 	public String toString() {
-		return "CUIT [CUIT=" + CUIT + ", longCUIT=" + longCUIT + "]";
+		return "CUIT [CUIT=" + cuitOriginal + ", longCUIT=" + longCUIT + "]";
 	}
 
 	@Override
@@ -67,11 +68,11 @@ public class CUIT {
 	}
 
 	public String getCUIT() {
-		return CUIT;
+		return cuitOriginal;
 	}
 
 	public void setCUIT(String cUIT) {
-		CUIT = cUIT;
+		cuitOriginal = cUIT;
 	}
 
 	public boolean isErrorFormato() {
