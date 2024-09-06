@@ -7,7 +7,7 @@ public class GestorDatos {
 			{ "20577270688", "E" }, { "20577871294", "E" }, { "20578071496", "E" }, { "20578471900", "E" },
 			{ "20589282808", "E" }, { "20593286848", "E" }, { "20594387959", "" }, { "20597991595", "" },
 			{ "20599693312", "E" }, { "20600293918", "E" } };
-	
+
 	/**
 	 * El metodo buscarCuit se encarga de buscar el cuit dentro del listado
 	 * ("Matriz" de forma secuencial).
@@ -15,16 +15,17 @@ public class GestorDatos {
 	 * Cambia los estados del objeto CUIT. Si es exento o si esta en el listado.
 	 *
 	 */
-	
-	public static void buscarCuit(CUIT objCUIT) {
+
+	public static void buscarCuit(CUIT objCUIT) throws RuntimeException {
 		for (int i = 0; i < lista.length; i++) {
 			if (lista[i][0].equals(objCUIT.getCuitFormatoBuscar())) {
 				objCUIT.setExento(lista[i][1].equals("E"));
 
-				break;
+				objCUIT.setInexistente(false);
+
+				return;
 			}
 		}
-		objCUIT.setInexistente(true);
 	}
 
 }

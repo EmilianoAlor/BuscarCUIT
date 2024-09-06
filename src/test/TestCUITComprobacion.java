@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import main.CUIT;
+import main.ControlCUIT;
 
 class TestCUITComprobacion {
 
@@ -16,8 +17,15 @@ class TestCUITComprobacion {
 		CUIT cuitPrueba2 = new CUIT("asdasdasdadsd");
 		assertEquals(true,cuitPrueba2.isInexistente());
 		
-		assertEquals("",cuitPrueba2);
 
+		CUIT cuitPrueba3 = new CUIT("20600293918");
+		
+		ControlCUIT Cont = new ControlCUIT();
+		
+		Cont.gestionarCUIT(cuitPrueba3);
+		
+		assertEquals(false,cuitPrueba3.isInexistente());
+		assertEquals(true,cuitPrueba3.isExento());
 	}
 
 
