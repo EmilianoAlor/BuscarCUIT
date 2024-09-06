@@ -1,10 +1,13 @@
 package test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.TreeSet;
+
 import org.junit.jupiter.api.Test;
 
 import main.CUIT;
 import main.ControlCUIT;
+import main.GestorDatos;
 
 class TestCUITComprobacion {
 
@@ -28,7 +31,30 @@ class TestCUITComprobacion {
 //		assertEquals(true,cuitPrueba3.isExento());
 	}
 
+	@Test
+	void procesarLote()
+	{
+		TreeSet<CUIT> listaCuit = new TreeSet<>();
 
+		listaCuit.add(new CUIT("20569863214"));
+		listaCuit.add(new CUIT("20571264628"));
+		listaCuit.add(new CUIT("20570864224"));
+		listaCuit.add(new CUIT("20600293918")); //ULTIMO. se fue de rango el contador.
+
+		
+		ControlCUIT cCuit = new ControlCUIT();
+		cCuit.gestionarCUIT(listaCuit);
+		
+		for (CUIT cuit : listaCuit) {
+			assertEquals(false,cuit.isInexistente());
+		}
+		
+		CUIT noestaCUITFINAL = new CUIT("20600293918");
+		
+		GestorDatos.buscarCuit(noestaCUITFINAL);
+		assertEquals(true,noestaCUITFINAL.isInexistente());
+		
+	}
 	
 
 	@Test

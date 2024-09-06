@@ -1,36 +1,40 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class Principal {
 
 	public static void main(String[] args) {
 
-		ControlCUIT cCuit = new ControlCUIT();
 		Scanner teclado = new Scanner(System.in);
 		CUIT objCuit = null;
 		String ingreso;
 
-		List<CUIT> listaCuit = new ArrayList<>();
+		TreeSet<CUIT> listaCuit = new TreeSet<>();
 
 		// Ingresar Multiples CUIT, hasta la palabra procesar.
 		do {
 
 			System.out.println("Increse el Cuit");
-
+			
+			//20569863214 /20600293916/ 20600293918  /20594387959  / 20600293920
+			//20569863214", "E" },20570864223{ "20570864224", "E" }, { "20571264628"
 			ingreso = teclado.nextLine();
 
 			if (!ingreso.equals("procesar")) {
 				objCuit = new CUIT(ingreso);
-				listaCuit.add(objCuit);
+				if (!objCuit.isErrorFormato())
+					listaCuit.add(objCuit);
 			}
 		} while (!ingreso.equals("procesar")); // Mientras el estado este en true= Hay ERROR pide otro cuit.
 
 		teclado.close();
 
+		// Muestro por pantalla.
 		if (objCuit != null) {
+			
+			ControlCUIT cCuit = new ControlCUIT();
 			cCuit.gestionarCUIT(listaCuit);
 
 			for (CUIT cuit : listaCuit) {

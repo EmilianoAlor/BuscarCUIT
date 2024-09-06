@@ -1,6 +1,6 @@
 package main;
 
-import java.util.List;
+import java.util.TreeSet;
 
 /**
  * Clase Intermedia.
@@ -12,10 +12,10 @@ import java.util.List;
  */
 public class ControlCUIT {
 
-	public void gestionarCUIT(List<CUIT> listaCuit) {
+	public void gestionarCUIT(TreeSet<CUIT> listaCuit) {
 
 		for (CUIT cuit : listaCuit) {
-			if(!cuit.isErrorFormato())
+			
 				GestorDatos.buscarCuit(cuit);
 		}
 			
