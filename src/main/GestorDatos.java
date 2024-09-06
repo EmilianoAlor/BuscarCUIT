@@ -16,7 +16,8 @@ public class GestorDatos {
 	 *
 	 */
 
-	public static void buscarCuit(CUIT objCUIT) throws RuntimeException {
+	public static void buscarCuit(CUIT objCUIT) {
+		
 		for (int i = 0; i < lista.length; i++) {
 			if (lista[i][0].equals(objCUIT.getCuitFormatoBuscar())) {
 				objCUIT.setExento(lista[i][1].equals("E"));

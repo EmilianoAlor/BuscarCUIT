@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
@@ -8,31 +10,45 @@ public class Principal {
 
 		ControlCUIT cCuit = new ControlCUIT();
 		Scanner teclado = new Scanner(System.in);
-		CUIT objCuit;
+		CUIT objCuit = null;
+		String ingreso;
 
+		List<CUIT> listaCuit = new ArrayList<>();
+
+		// Ingresar Multiples CUIT, hasta la palabra procesar.
 		do {
 
 			System.out.println("Increse el Cuit");
 
-			objCuit = new CUIT(teclado.nextLine());
+			ingreso = teclado.nextLine();
 
-			if (objCuit.isErrorFormato())
-				System.out.println("CUIT Invalido:" + objCuit.getCUIT());
-			else {
-				cCuit.gestionarCUIT(objCuit);
-
-				if (objCuit.isInexistente())
-					System.out.println("CUIT Inexistente en el listado." + objCuit.getCUIT());
-				else {
-					if (objCuit.isExento())
-						System.out.println("El CUIT:" + objCuit.getCUIT() + " Esta Exento del impuesto");
-					else
-						System.out.println("El CUIT:" + objCuit.getCUIT() + " NO ESTA Exento del impuesto");
-				}
+			if (!ingreso.equals("procesar")) {
+				objCuit = new CUIT(ingreso);
+				listaCuit.add(objCuit);
 			}
-		} while (objCuit.isErrorFormato()); // Mientras el estado este en true= Hay ERROR pide otro cuit.
+		} while (!ingreso.equals("procesar")); // Mientras el estado este en true= Hay ERROR pide otro cuit.
 
 		teclado.close();
+
+		if (objCuit != null) {
+			cCuit.gestionarCUIT(listaCuit);
+
+			for (CUIT cuit : listaCuit) {
+				if (cuit.isErrorFormato())
+					System.out.println("CUIT Invalido:" + cuit.getCUIT());
+				else {
+					if (cuit.isInexistente())
+						System.out.println("CUIT Inexistente en el listado." + cuit.getCUIT());
+					else {
+						if (cuit.isExento())
+							System.out.println("El CUIT:" + cuit.getCUIT() + " Esta Exento del impuesto");
+						else
+							System.out.println("El CUIT:" + cuit.getCUIT() + " NO ESTA Exento del impuesto");
+					}
+				}
+			}
+
+		}
 
 	}
 

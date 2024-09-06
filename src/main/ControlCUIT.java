@@ -1,5 +1,7 @@
 package main;
 
+import java.util.List;
+
 /**
  * Clase Intermedia.
  *
@@ -10,9 +12,13 @@ package main;
  */
 public class ControlCUIT {
 
-	public void gestionarCUIT(CUIT objCUIT) {
+	public void gestionarCUIT(List<CUIT> listaCuit) {
 
-			GestorDatos.buscarCuit(objCUIT);
+		for (CUIT cuit : listaCuit) {
+			if(!cuit.isErrorFormato())
+				GestorDatos.buscarCuit(cuit);
+		}
+			
 	}
 
 }
